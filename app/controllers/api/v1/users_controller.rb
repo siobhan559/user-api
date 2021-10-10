@@ -16,7 +16,12 @@ class Api::V1::UsersController < ActionController::API
   end
 
   def destroy
-
+    if request.headers["Authorization"] == ENV["API_KEY"]
+      @user.destroy
+      head :no_content
+    else
+      render_error
+    end
   end
 
   private
@@ -26,7 +31,7 @@ class Api::V1::UsersController < ActionController::API
   end
 
   def user_params
-    params.require(:user).permit(:username, :email, :password)
+    params.require(:user).permit(:username, :email, :password, :password_confirmation)
   end
 
   def render_error
