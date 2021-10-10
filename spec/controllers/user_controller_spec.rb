@@ -18,17 +18,6 @@ RSpec.describe Api::V1::UsersController do
       end
     end
 
-    # describe 'GET /users/:id' do
-    #   it 'returns a user' do
-    #     FactoryBot.create(:user, username: 'siobhan', email: 'siobhan@test.com', password: 'password', password_confirmation: 'password')
-
-    #     get '/api/v1/users/1'
-
-    #     expect(response).to have_http_status(:success)
-    #     # expect(User.find_by_id(1)).to eq(1)
-    #   end
-    # end
-
     describe 'POST /users' do
 
       it 'creates a new user' do
