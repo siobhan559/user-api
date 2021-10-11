@@ -36,7 +36,7 @@ class Api::V1::UsersController < ActionController::API
   end
 
   def user_params
-    params.permit(:username, :email, :password, :password_confirmation)
+    params.require(:user).permit(:username, :email, :password, :password_confirmation)
   end
 
   def render_error
