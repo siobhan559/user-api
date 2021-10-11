@@ -1,5 +1,6 @@
 class Api::V1::UsersController < ActionController::API
   before_action :set_user, only: [ :show, :destroy ]
+  wrap_parameters include: User.attribute_names + [:password, :password_confirmation]
 
   def index
     @users = User.all
@@ -35,7 +36,7 @@ class Api::V1::UsersController < ActionController::API
   end
 
   def user_params
-    params.require(:user).permit(:username, :email, :password, :password_confirmation)
+    params.permit(:username, :email, :password, :password_confirmation)
   end
 
   def render_error
