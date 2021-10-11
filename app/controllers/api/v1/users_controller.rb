@@ -1,6 +1,6 @@
 class Api::V1::UsersController < ActionController::API
-  before_action :set_user, only: [ :show, :destroy ]
-  wrap_parameters include: User.attribute_names + [:password, :password_confirmation]
+  before_action :set_user, only: %i[show destroy]
+  wrap_parameters include: User.attribute_names + %i[password password_confirmation]
 
   def index
     @users = User.all
@@ -21,7 +21,7 @@ class Api::V1::UsersController < ActionController::API
   end
 
   def destroy
-    if request.headers["Authorization"] == ENV["API_KEY"]
+    if request.headers['Authorization'] == ENV['API_KEY']
       @user.destroy
       head :no_content
     else
@@ -41,6 +41,6 @@ class Api::V1::UsersController < ActionController::API
 
   def render_error
     render json: { errors: @user.errors.full_messages },
-      status: :unprocessable_entity
+           status: :unprocessable_entity
   end
 end
